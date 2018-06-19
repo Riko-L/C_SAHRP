@@ -1,7 +1,6 @@
 C:\Users\Utilisateur\C_Sharp\repo\CampusWork\HelloWorld\bin\Debug\HelloWorld.exe.config
 C:\Users\Utilisateur\C_Sharp\repo\CampusWork\HelloWorld\bin\Debug\HelloWorld.exe
 C:\Users\Utilisateur\C_Sharp\repo\CampusWork\HelloWorld\bin\Debug\HelloWorld.pdb
-C:\Users\Utilisateur\C_Sharp\repo\CampusWork\HelloWorld\obj\Debug\HelloWorld.csprojAssemblyReference.cache
 C:\Users\Utilisateur\C_Sharp\repo\CampusWork\HelloWorld\obj\Debug\HelloWorld.csproj.CoreCompileInputs.cache
 C:\Users\Utilisateur\C_Sharp\repo\CampusWork\HelloWorld\obj\Debug\HelloWorld.exe
 C:\Users\Utilisateur\C_Sharp\repo\CampusWork\HelloWorld\obj\Debug\HelloWorld.pdb
