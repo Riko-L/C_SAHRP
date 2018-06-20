@@ -12,45 +12,67 @@ using System.Threading.Tasks;
 
 namespace MetroLibrary
 {
-        public class MetroApi
+    public class MetroApi
     {
+
 
         private const string API_END_POINT = "https://data.metromobilite.fr/api";
 
-        /// <summary>
-        /// Methode Permet d'obtenir les lignes
-        /// </summary>
-        /// <param name="longitude"></param>
-        /// <param name="latitude"></param>
-        /// <param name="rayon"></param>
-        /// <returns></returns>
-        public List<Lines> getLines(double longitude = 5.731879, double latitude = 45.158616, int rayon = 300)
+        private WokingTasks workTask;
+
+        public MetroApi()
         {
+            workTask = new WokingTasks();
 
-            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
-
-            WebRequest request = WebRequest.Create($"{API_END_POINT}/linesNear/json?x={longitude}&y={latitude}&dist={rayon}&details=true");
-
-            string jsonResponse = doRequest(request);
-
-            List<Lines> listFromServer = JsonConvert.DeserializeObject<List<Lines>>(jsonResponse);
-
-            return listFromServer;
         }
 
-        public string getLinesJSON( double longitude = 5.731879, double latitude = 45.158616, int rayon = 300)
+        /// <summary>
+        /// Methode Permet d'obtenir les arrêts disponibles pour un point GPS donné avec un rayon d'action donné
+        /// </summary>
+        /// <param name="longitude">Longitude</param>
+        /// <param name="latitude">Latitude</param>
+        /// <param name="rayon">Rayoun</param>
+        /// <returns>Collection d'arrêts</returns>
+        public List<StopLines> getStopLines(double longitude = 5.731879, double latitude = 45.158616, int rayon = 300)
         {
-
+            //Pour que lors de la convertion de double en string le '.' reste
             Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
 
             WebRequest request = WebRequest.Create($"{API_END_POINT}/linesNear/json?x={longitude}&y={latitude}&dist={rayon}&details=true");
 
             string jsonResponse = doRequest(request);
-            
+
+            List<StopLines> convert = workTask.convertStopLines(jsonResponse);
+
+            var clean = workTask.delDuplicateItem(convert);
+
+            return clean;
+        }
+
+        /// <summary>
+        /// Methode Permet d'obtenir les arrêts disponibles pour un point GPS donné avec un rayon d'action donné
+        /// </summary>
+        /// <param name="longitude">Longitude</param>
+        /// <param name="latitude">Latitude</param>
+        /// <param name="rayon">Rayoun</param>
+        /// <returns>JSON</returns>
+        public string getStopLines_JSON(double longitude = 5.731879, double latitude = 45.158616, int rayon = 300)
+        {
+            //Pour que lors de la convertion de double en string le '.' reste
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
+
+            WebRequest request = WebRequest.Create($"{API_END_POINT}/linesNear/json?x={longitude}&y={latitude}&dist={rayon}&details=true");
+
+            string jsonResponse = doRequest(request);
+
             return jsonResponse;
         }
 
-
+        /// <summary>
+        /// Obtenir toutes les caractéristiques de la ligne
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns>Collection</returns>
         public FeatureCollection getGetFeatures(string line)
         {
             line = line.Replace(":", "_");
@@ -75,8 +97,12 @@ namespace MetroLibrary
             return jsonResponse;
         }
 
-
-        public List<LinesDescription> getDescriptionOfLine(string id)
+        /// <summary>
+        /// Permet d'obtenir les informations de la ligne
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Collection de LinesDescription </returns>
+        public List<LinesDescription> getInforamtionsOfLine(string id)
         {
 
             WebRequest request = WebRequest.Create($"{API_END_POINT}/routers/default/index/routes?codes={id}");
@@ -84,6 +110,10 @@ namespace MetroLibrary
             string jsonResponse = doRequest(request);
 
             List<LinesDescription> listFromServer = JsonConvert.DeserializeObject<List<LinesDescription>>(jsonResponse);
+
+            List<LinesDescription> convert = workTask.convertLinesDescription(jsonResponse);
+
+            var clean = workTask.delDuplicateItem(convert);
 
             return listFromServer;
 
@@ -100,6 +130,11 @@ namespace MetroLibrary
 
         }
 
+        /// <summary>
+        /// Retour la liste de tous les arrêts de la ligne
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns>Collection des arrêts</returns>
         public List<string> getGetStopZone(string line)
         {
             List<string> stopZones = new List<string>();
@@ -112,9 +147,9 @@ namespace MetroLibrary
             FeatureCollection listFromServer = JsonConvert.DeserializeObject<FeatureCollection>(jsonResponse);
 
 
-            foreach(Feature feature in listFromServer.features)
+            foreach (Feature feature in listFromServer.features)
             {
-                foreach(string stopZone in feature.properties.ZONES_ARRET)
+                foreach (string stopZone in feature.properties.ZONES_ARRET)
                 {
                     stopZones.Add(stopZone);
 
@@ -124,7 +159,11 @@ namespace MetroLibrary
             return stopZones;
         }
 
-
+        /// <summary>
+        /// Execute la requète 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>un json</returns>
         private string doRequest(WebRequest request)
         {
             StreamReader reader = null;

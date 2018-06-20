@@ -12,22 +12,19 @@ namespace Iteration_2
         {
             MetroApi metroApi = new MetroApi();
 
-            List<Lines> resultGetLine = metroApi.getLines();
 
-            List<string> lineWithoutDuplicate = new List<string>();
+            List<StopLines> resultGetLine = metroApi.getStopLines();
 
 
-            foreach (Lines line in resultGetLine)
+
+
+            foreach (StopLines line in resultGetLine)
             {
                 Console.BackgroundColor = Color.White;
                 Console.ForegroundColor = Color.Black;
 
-                if (!lineWithoutDuplicate.Contains(line.id))
-                {
-                    Console.WriteLine($"Identifiant de l'arret la ligne : {line.id}");
-                    Console.WriteLine($"Nom de l''arret : {line.name}");
-                    lineWithoutDuplicate.Add(line.id);
-                }
+                Console.WriteLine($"Identifiant de l'arret la ligne : {line.id}");
+                Console.WriteLine($"Nom de l''arret : {line.name}");
 
                 List<string> lineIdNameWithoutDuplicate = new List<string>();
 
@@ -37,7 +34,7 @@ namespace Iteration_2
                     {
                         lineIdNameWithoutDuplicate.Add(lineIdName);
 
-                        List<LinesDescription> resultDescriptionOfLine = metroApi.getDescriptionOfLine(lineIdName);
+                        List<LinesDescription> resultDescriptionOfLine = metroApi.getInforamtionsOfLine(lineIdName);
 
                         foreach (LinesDescription lnDesc in resultDescriptionOfLine)
                         {
@@ -57,26 +54,15 @@ namespace Iteration_2
 
 
             //////////////////TEST/////////////////////
-            string testJObjet = metroApi.getLinesJSON();
+            List<string> stops = metroApi.getGetStopZone("SEM:A");
 
-            string test2JObjet = metroApi.getGetFeaturesJSON("SEM:A");
-
-            string test3JObjet = metroApi.getDescriptionOfLineJSON("SEM:A");
-
-
-
-            Console.WriteLine(testJObjet);
-            Console.WriteLine();
+            foreach (var item in stops)
+            {
+                Console.WriteLine(item);
+            }
 
 
-            Console.WriteLine(test2JObjet);
-            Console.WriteLine();
 
-
-            Console.WriteLine(test3JObjet);
-            Console.WriteLine();
-
-            
 
             Console.Read();
 

@@ -44,10 +44,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FeatureCollection.cs" />
-    <Compile Include="Lines.cs" />
+    <Compile Include="StopLines.cs" />
     <Compile Include="LinesDescription.cs" />
     <Compile Include="MetroApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WokingTasks.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

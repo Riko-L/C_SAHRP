@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MetroLibrary
 
 {
-    public  class Lines
+    public  class StopLines
     {
         public string id { get; set; }
         public string name { get; set; }
