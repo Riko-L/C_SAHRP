@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using Console = Colorful.Console;
+using MetroLibrary;
+using Newtonsoft.Json.Linq;
 
 namespace Iteration_2
 {
@@ -8,10 +10,9 @@ namespace Iteration_2
     {
         static void Main(string[] args)
         {
+            MetroApi metroApi = new MetroApi();
 
-            ApiWebRequest apiWebRequest = new ApiWebRequest();
-
-            List<Lines> resultGetLine = apiWebRequest.getLines();
+            List<Lines> resultGetLine = metroApi.getLines();
 
             List<string> lineWithoutDuplicate = new List<string>();
 
@@ -36,7 +37,7 @@ namespace Iteration_2
                     {
                         lineIdNameWithoutDuplicate.Add(lineIdName);
 
-                        List<LinesDescription> resultDescriptionOfLine = apiWebRequest.getDescriptionOfLine(lineIdName);
+                        List<LinesDescription> resultDescriptionOfLine = metroApi.getDescriptionOfLine(lineIdName);
 
                         foreach (LinesDescription lnDesc in resultDescriptionOfLine)
                         {
@@ -53,6 +54,29 @@ namespace Iteration_2
 
                 Console.WriteLine();
             }
+
+
+            //////////////////TEST/////////////////////
+            string testJObjet = metroApi.getLinesJSON();
+
+            string test2JObjet = metroApi.getGetFeaturesJSON("SEM:A");
+
+            string test3JObjet = metroApi.getDescriptionOfLineJSON("SEM:A");
+
+
+
+            Console.WriteLine(testJObjet);
+            Console.WriteLine();
+
+
+            Console.WriteLine(test2JObjet);
+            Console.WriteLine();
+
+
+            Console.WriteLine(test3JObjet);
+            Console.WriteLine();
+
+            
 
             Console.Read();
 

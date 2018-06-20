@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Iteration_2
+namespace MetroLibrary
 {
-    class FeatureCollection
+    public class FeatureCollection
     {
         public string type { get; set; }
         public List<Feature> features { get; set; }

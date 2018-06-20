@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Iteration_2
+namespace MetroLibrary
+
 {
-    class Lines
+    public  class Lines
     {
         public string id { get; set; }
         public string name { get; set; }
