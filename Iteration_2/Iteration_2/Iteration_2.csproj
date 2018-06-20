@@ -52,6 +52,7 @@
     <Compile Include="ApiWebRequest.cs" />
     <Compile Include="FeatureCollection.cs" />
     <Compile Include="Lines.cs" />
+    <Compile Include="LinesDescription.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
