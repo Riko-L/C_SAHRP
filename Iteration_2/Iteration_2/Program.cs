@@ -39,7 +39,7 @@ namespace Iteration_2
                         foreach (LinesDescription lnDesc in resultDescriptionOfLine)
                         {
 
-                            var colorback = System.Drawing.ColorTranslator.FromHtml($"#{lnDesc.color}");
+                            var colorback = ColorTranslator.FromHtml($"#{lnDesc.color}");
 
                             Console.ForegroundColor = colorback;
                             Console.WriteLine($"Nom de la ligne (id) : {lineIdName} ===>  Nom de la ligne : {lnDesc.longName} ==> Nom court de la ligne : {lnDesc.shortName} ==> Type de la ligne: {lnDesc.mode} ");
@@ -54,7 +54,7 @@ namespace Iteration_2
 
 
             //////////////////TEST/////////////////////
-            List<string> stops = metroApi.getGetStopZone("SEM:A");
+            List<string> stops = metroApi.getGetStopZone("SEM:B");
 
             foreach (var item in stops)
             {

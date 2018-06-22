@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MetroLibraryGoogle;
 
 namespace MetroLibrary
 {
@@ -24,7 +25,7 @@ namespace MetroLibrary
         {
             List<StopLines> cleanList = new List<StopLines>();
 
-            cleanList = collection.GroupBy(item => item.id).Select(item => item.First()).ToList();
+            cleanList = collection.GroupBy(item => item.name).Select(item => item.First()).ToList();
 
             return cleanList;
         }
@@ -48,5 +49,17 @@ namespace MetroLibrary
 
             return cleanList;
         }
+
+
+
+        public AdressToGPSGoogle convertAdressGoogle(string jsonResponse)
+        {
+            AdressToGPSGoogle listFromServer = new AdressToGPSGoogle();
+
+            listFromServer = JsonConvert.DeserializeObject<AdressToGPSGoogle>(jsonResponse);
+
+            return listFromServer;
+        }
+
     }
 }

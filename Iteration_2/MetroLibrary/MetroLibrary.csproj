@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdressToGPSGoogle.cs" />
     <Compile Include="FeatureCollection.cs" />
+    <Compile Include="GoogleApi.cs" />
     <Compile Include="StopLines.cs" />
     <Compile Include="LinesDescription.cs" />
     <Compile Include="MetroApi.cs" />
