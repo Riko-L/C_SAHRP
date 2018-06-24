@@ -23,7 +23,7 @@ namespace MetroApp
     /// <summary>
     /// Logique d'interaction pour Home.xaml
     /// </summary>
-    public partial class Home : Page , INotifyPropertyChanged
+    public partial class Home : Page, INotifyPropertyChanged
 
     {
 
@@ -44,7 +44,10 @@ namespace MetroApp
             }
         }
         public string pAddresse { get; set; }
-       
+        //public List<StringValue> pLines { get; set; }
+        public List<LinesDescription> pLines { get; set; }
+
+
         public List<StopLines> pStopLine { get; set; }
         MetroApi metroApi;
         GoogleApi googleApi;
@@ -60,11 +63,12 @@ namespace MetroApp
             pLatitude = "45.1764946";
             pLongitude = "5.709360123";
             pRayon = "350";
-            
+
 
 
             Help.Text = "Merci de renseigner les champs Longitude, Latitude et rayon ci dessous" +
-                 " afin d'obtenir les différentes lignes disponible";
+                 " afin d'obtenir les différentes arrêts disponible." +
+                 $" Vous pouvez aussi saisir directement une adresse '{pAddresse}'";
 
             Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
             Home_Grid.DataContext = this;
@@ -73,10 +77,7 @@ namespace MetroApp
 
         private void doRequete(object sender, RoutedEventArgs e)
         {
-            // Voir la Page About
-            // About aboutPage = new About();
-            // this.NavigationService.Navigate(aboutPage);
-            //  
+
             pLongitude = replaceACaractere(Longitude.Text);
             pLatitude = replaceACaractere(Latitude.Text);
             pRayon = Rayon.Text;
@@ -85,7 +86,7 @@ namespace MetroApp
 
             pStopLine = metroApi.getStopLines(Convert.ToDouble(pLongitude), Convert.ToDouble(pLatitude), Convert.ToInt32(pRayon));
 
-            
+
             grdStopLineData.ItemsSource = pStopLine;
 
         }
@@ -99,7 +100,6 @@ namespace MetroApp
             else
             {
                 return str.Replace(',', '.');
-
             }
 
         }
@@ -125,5 +125,47 @@ namespace MetroApp
         }
 
 
+        private void grdStopLineData_Selected(object sender, RoutedEventArgs e)
+        {
+            // pLines = new List<StringValue>();
+            pLines = new List<LinesDescription>();
+            StopLines items = (StopLines)grdStopLineData.SelectedItem;
+
+            if (items != null)
+            {
+                foreach (string line in items.lines)
+                {
+                    // StringValue wline = new StringValue(line);
+                    if (line != null )
+                    {
+                    pLines.Add(metroApi.getInforamtionsOfLine(line)[0]);
+
+                    }
+                }
+                grdLines.ItemsSource = pLines;
+
+            }
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            About aboutPage = new About();
+            this.NavigationService.Navigate(aboutPage);
+
+        }
     }
+
+    public class StringValue
+    {
+        public StringValue(string s)
+        {
+            _value = s;
+        }
+        public string Value { get { return _value; } set { _value = value; } }
+        string _value;
+    }
+
+
 }

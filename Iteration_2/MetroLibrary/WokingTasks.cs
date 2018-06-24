@@ -24,8 +24,34 @@ namespace MetroLibrary
         public List<StopLines> delDuplicateItem(List<StopLines> collection)
         {
             List<StopLines> cleanList = new List<StopLines>();
+            
+            
 
-            cleanList = collection.GroupBy(item => item.name).Select(item => item.First()).ToList();
+            //cleanList = collection.GroupBy(item => item.id).Select(item => item.First()).ToList();
+
+           
+            
+
+            foreach(StopLines stop in collection)
+            {
+                
+
+                if(!cleanList.Contains(stop))
+                {
+                   
+                    foreach(string str in stop.lines)
+                    {
+
+                        if (!stop.lines.Contains(str))
+                        {
+                            cleanList.Add(stop);
+                        }
+                    }
+
+                }
+                
+            }
+
 
             return cleanList;
         }

@@ -5,4 +5,4 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MetroApp"
         mc:Ignorable="d"
-        Title="Métro Application" Height="600" Width="850" MinHeight="550" MaxHeight="550" MinWidth="850" MaxWidth="850" Source="Home.xaml" />
+        Title="Métro Application" Height="600" Width="850" MinHeight="600" MaxHeight="600" MinWidth="850" MaxWidth="850" Source="Home.xaml" />

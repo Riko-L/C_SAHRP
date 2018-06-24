@@ -9,55 +9,77 @@
 
     <Grid Name="Home_Grid" Margin="10,0,10,10">
         <Grid.Background>
-            <ImageBrush ImageSource="watermark.png" TileMode="Tile" Stretch="UniformToFill"/>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black" Offset="1"/>
+                <GradientStop Color="#FF019EBC"/>
+            </LinearGradientBrush>
         </Grid.Background>
+
+
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="89" />
+            <ColumnDefinition Width="123" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
 
-            <RowDefinition Height="23*"/>
+            <RowDefinition Height="224*"/>
 
-            <RowDefinition Height="32*"/>
+
+            <RowDefinition Height="265*"/>
+
         </Grid.RowDefinitions>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="293" Grid.Row="1" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="830" Grid.ColumnSpan="2"/>
+
+
+
         <Label Grid.Column="1" VerticalAlignment="Center" FontFamily="Trebuchet MS" 
-        FontWeight="Bold" FontSize="18" Foreground="#0066cc" Margin="0,31,0,165" Content="Métro Application" Height="30"/>
+        FontWeight="Bold" FontSize="36" Foreground="White" Margin="5,-2,-5,172" Content="Métro Application" Height="54" Background="{x:Null}"/>
 
-        <TextBlock Name="Help" Grid.Column="1" HorizontalAlignment="Left" Margin="10,59,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="39" Width="408"/>
+        <TextBlock x:Name="Help" Grid.Column="1" HorizontalAlignment="Left" Margin="5,59,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="55" Width="618"/>
 
-        <TextBox Name="AddressBox" Text="{Binding pAddresse ,Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="74,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
-        <Label Content="Addresse" Grid.Column="1" HorizontalAlignment="Left" Margin="0,103,0,100" VerticalContentAlignment="Center" Height="23" Width="74"/>
+        <TextBox x:Name="AddressBox" Text="{Binding pAddresse, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="74,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
+        <Label Content="Addresse" Grid.Column="1" HorizontalAlignment="Left" Margin="0,126,0,98" VerticalContentAlignment="Top" Width="74"/>
 
-        <Button Content="Transformation vers GPS" Grid.Column="1" HorizontalAlignment="Left" Margin="428,103,0,0" VerticalAlignment="Top" Width="195" RenderTransformOrigin="0.476,0.217" Height="23" Background="#FFD43F14" Click="doTranslateAddresstoGPS"/>
+        <Button Content="Transformation vers GPS" Grid.Column="1" HorizontalAlignment="Left" Margin="428,126,0,0" VerticalAlignment="Top" Width="195" RenderTransformOrigin="0.476,0.217" Height="23" Background="#FF67C6DD" Click="doTranslateAddresstoGPS" FontWeight="Bold"/>
 
-        <Label Content="Longitude" Grid.Column="1" HorizontalAlignment="Left" Margin="0,151,0,0" VerticalAlignment="Top" Width="74" Height="26"/>
-        <TextBox Name="Longitude" Text="{Binding pLongitude ,Mode=TwoWay}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Grid.Column="1" Margin="74,154,0,0" />
+        <Label Content="Longitude" Grid.Column="1" HorizontalAlignment="Left" Margin="0,175,0,0" VerticalAlignment="Top" Width="74" Height="26"/>
+        <TextBox x:Name="Longitude" Text="{Binding pLongitude, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Grid.Column="1" Margin="74,178,0,0" />
 
-        <Label Content="Latitude" Grid.Column="1" HorizontalAlignment="Left" Margin="214,151,0,0" VerticalAlignment="Top" Width="70" Height="26"/>
-        <TextBox Name="Latitude" Text="{Binding pLatitude ,Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="284,154,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Grid.Column="1" />
+        <Label Content="Latitude" Grid.Column="1" HorizontalAlignment="Left" Margin="214,175,0,0" VerticalAlignment="Top" Width="70" Height="26"/>
+        <TextBox x:Name="Latitude" Text="{Binding pLatitude, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="284,178,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Grid.Column="1" />
 
-        <TextBox Name="Rayon" Text="{Binding pRayon ,Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="503,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
-        <Label Content="Rayon" Grid.Column="1" HorizontalAlignment="Left" Margin="428,151,0,0" VerticalAlignment="Top" Width="70" Height="26"/>
-
-
-        <Button Content="Résultat" Grid.Column="1" HorizontalAlignment="Left" Margin="503,203,0,0" VerticalAlignment="Top" Width="120" Click="doRequete" Height="23" Background="#FF44B2CB"/>
+        <TextBox x:Name="Rayon" Text="{Binding pRayon, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="503,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+        <Label Content="Rayon" Grid.Column="1" HorizontalAlignment="Left" Margin="428,175,0,0" VerticalAlignment="Top" Width="70" Height="26"/>
 
 
-        <DataGrid ItemsSource="{Binding pStopLine ,Mode=TwoWay}" IsReadOnly="True" AutoGenerateColumns="False" Name="grdStopLineData" Grid.Column="1" HorizontalAlignment="Left" Height="188" Margin="10,34,0,0" Grid.Row="1" VerticalAlignment="Top" Width="345" Background="#FFEAFAFF">
+        <Button Content="Résultat" Grid.Column="1" HorizontalAlignment="Left" Margin="503,214,0,0" VerticalAlignment="Top" Width="120" Click="doRequete" Height="23" Background="#FF67C6DD" FontWeight="Bold"/>
+
+        <Label x:Name="lbGridList" Content="{Binding pRayon}" ContentStringFormat="Arrêts dans un rayon de {0} mètres" HorizontalContentAlignment="Center" Margin="50,33,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="29" Width="345" Grid.Row="1" FontSize="14" Background="White" Grid.ColumnSpan="2"/>
+
+        <DataGrid ItemsSource="{Binding pStopLine, Mode=TwoWay}" IsReadOnly="True" AutoGenerateColumns="False" x:Name="grdStopLineData" HorizontalAlignment="Left" Height="188" Margin="50,62,0,0" Grid.Row="1" VerticalAlignment="Top" Width="345" Background="#FFEAFAFF" SelectionChanged="grdStopLineData_Selected" Grid.ColumnSpan="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ARRET ID" Binding="{Binding id}" Width="0.3*" Foreground="Black" ></DataGridTextColumn>
-                <DataGridTextColumn Header="NAME" Binding="{Binding name}" Width="0.7*"></DataGridTextColumn>
+                <!--<DataGridTextColumn Header="ARRET ID" Binding="{Binding id}" Width="0.3*" Foreground="Black" ></DataGridTextColumn>-->
+                <DataGridTextColumn Header="NAME" Binding="{Binding name}" Width="1*"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <Rectangle Fill="#FF125583" HorizontalAlignment="Left" Height="540" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="60"/>
-        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" HorizontalAlignment="Left" Height="28" Margin="10,6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="345" Background="#FF44B2CB"/>
-        <Label Name="lbGridList" Content="{Binding pRayon}" ContentStringFormat="Arrêts dans le un rayon de {0} mètres" Grid.Column="1" HorizontalContentAlignment="Center" Margin="10,6,386,0" VerticalAlignment="Top" Grid.Row="1" Height="23" Width="345"/>
-        <DataGrid ItemsSource="{Binding pStopLine.lines ,Mode=TwoWay}" Name="grdLines" Grid.Column="1" HorizontalAlignment="Left" Height="188" Margin="414,34,0,0" Grid.Row="1" VerticalAlignment="Top" Width="257">
-        <DataGrid.Columns>
-                <DataGridTextColumn Header="LINES" Binding="{Binding name}" Width="0.3*" Foreground="Black"></DataGridTextColumn>
-        </DataGrid.Columns>
-            </DataGrid>
+        <Rectangle Fill="White" Height="247" Stroke="Black" VerticalAlignment="Top" StrokeThickness="0" HorizontalAlignment="Left" Width="123"/>
+
+
+        <DataGrid ItemsSource="{Binding pLines, Mode=TwoWay}" AutoGenerateColumns="False" x:Name="grdLines" Grid.Column="1" HorizontalAlignment="Left" Height="188" Margin="302,62,0,0" Grid.Row="1" VerticalAlignment="Top" Width="371" Background="#FFEAFAFF" IsReadOnly="True">
+            <DataGrid.Columns>
+                <!--<DataGridTextColumn Header="LINES" Binding="{Binding id}" Width="0.3*" Foreground="{Binding color}"></DataGridTextColumn>-->
+                <DataGridTextColumn Header="TYPE" Binding="{Binding mode}" Width="0.1*" Foreground="Black"/>
+                <DataGridTextColumn Header="NUM" Binding="{Binding shortName}" Width="0.1*" Foreground="Black"/>
+                <DataGridTextColumn Header="NAME" Binding="{Binding longName}" Width="0.8*" Foreground="Black"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Image HorizontalAlignment="Left" Height="107" VerticalAlignment="Top" Width="108" Source="metro2.png" Stretch="UniformToFill" Margin="7,7,0,0"/>
+        <Button Content="MAP" Grid.Column="1" HorizontalAlignment="Left" Margin="598,253,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="Button_Click" RenderTransformOrigin="0.373,0.55"/>
+        <Label x:Name="lbGridList_Lines" Content="Lignes disponibles" HorizontalContentAlignment="Center" Margin="302,33,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="29" Width="371" Grid.Row="1" FontSize="14" Background="White" Grid.Column="1"/>
+
+
+
     </Grid>
 </Page> 
