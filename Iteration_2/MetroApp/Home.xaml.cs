@@ -43,12 +43,11 @@ namespace MetroApp
                 }
             }
         }
+
         public string pAddresse { get; set; }
-        //public List<StringValue> pLines { get; set; }
         public List<LinesDescription> pLines { get; set; }
-
-
         public List<StopLines> pStopLine { get; set; }
+
         MetroApi metroApi;
         GoogleApi googleApi;
 
@@ -62,7 +61,7 @@ namespace MetroApp
             pAddresse = "36 Rue des Eaux Claires, 38100 Grenoble, France";
             pLatitude = "45.1764946";
             pLongitude = "5.709360123";
-            pRayon = "350";
+            pRayon = "1000";
 
 
 
@@ -85,7 +84,6 @@ namespace MetroApp
             pStopLine = new List<StopLines>();
 
             pStopLine = metroApi.getStopLines(Convert.ToDouble(pLongitude), Convert.ToDouble(pLatitude), Convert.ToInt32(pRayon));
-
 
             grdStopLineData.ItemsSource = pStopLine;
 
@@ -114,20 +112,15 @@ namespace MetroApp
             Latitude.Text = Convert.ToString(wAdressToGPSGoogles.results[0].geometry.location.lat);
             Longitude.Text = Convert.ToString(wAdressToGPSGoogles.results[0].geometry.location.lng);
 
+            doRequete(sender, e);
+
         }
 
-        private void RaisePropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
-        }
 
 
         private void grdStopLineData_Selected(object sender, RoutedEventArgs e)
         {
-            // pLines = new List<StringValue>();
+
             pLines = new List<LinesDescription>();
             StopLines items = (StopLines)grdStopLineData.SelectedItem;
 
@@ -135,10 +128,10 @@ namespace MetroApp
             {
                 foreach (string line in items.lines)
                 {
-                    // StringValue wline = new StringValue(line);
-                    if (line != null )
+
+                    if (line != null)
                     {
-                    pLines.Add(metroApi.getInforamtionsOfLine(line)[0]);
+                        pLines.Add(metroApi.getInforamtionsOfLine(line)[0]);
 
                     }
                 }
@@ -151,21 +144,20 @@ namespace MetroApp
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            About aboutPage = new About();
-            this.NavigationService.Navigate(aboutPage);
+            Map mapPage = new Map(pStopLine, pLongitude, pLatitude, pRayon);
+            this.NavigationService.Navigate(mapPage);
 
         }
-    }
 
-    public class StringValue
-    {
-        public StringValue(string s)
+
+
+        private void RaisePropertyChanged(string property)
         {
-            _value = s;
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
         }
-        public string Value { get { return _value; } set { _value = value; } }
-        string _value;
     }
-
 
 }

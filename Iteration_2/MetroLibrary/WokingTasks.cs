@@ -23,37 +23,29 @@ namespace MetroLibrary
 
         public List<StopLines> delDuplicateItem(List<StopLines> collection)
         {
-            List<StopLines> cleanList = new List<StopLines>();
-            
-            
 
-            //cleanList = collection.GroupBy(item => item.id).Select(item => item.First()).ToList();
+
+            List<StopLines> collectionWOutDuplicate = new List<StopLines>(collection.GroupBy(item => item.name).Select(item => item.First()));
+
 
            
-            
 
-            foreach(StopLines stop in collection)
+            foreach (StopLines stopLineWD in collectionWOutDuplicate)
             {
-                
-
-                if(!cleanList.Contains(stop))
-                {
-                   
-                    foreach(string str in stop.lines)
+                foreach (StopLines stopLine in collection)
+                {   //merci Alex 
+                    if (stopLineWD.name.Equals(stopLine.name))
                     {
+                        List<string> newLines = new List<string>(stopLineWD.lines.Union(stopLine.lines));
 
-                        if (!stop.lines.Contains(str))
-                        {
-                            cleanList.Add(stop);
-                        }
+                        stopLineWD.GetType().GetProperty("lines").SetValue(stopLineWD, newLines);
                     }
-
                 }
-                
             }
 
 
-            return cleanList;
+
+            return collectionWOutDuplicate;
         }
 
 
@@ -86,6 +78,9 @@ namespace MetroLibrary
 
             return listFromServer;
         }
+
+
+
 
     }
 }
