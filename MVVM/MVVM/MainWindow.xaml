@@ -1,0 +1,23 @@
+﻿<Window x:Class="MVVM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVVM"
+        xmlns:view="clr-namespace:MVVM.View"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="825">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Users">
+                <Frame Source="/View/UserView.xaml"  />
+            </TabItem>
+            <TabItem Header="Messages">
+            <Frame Source="/View/MessageView.xaml" />
+            </TabItem>
+            <TabItem Header="About" >
+            <Label Content="Créer par ERIC LE DEVEDEC" HorizontalContentAlignment="Center"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
