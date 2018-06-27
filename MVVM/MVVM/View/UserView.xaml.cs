@@ -31,5 +31,10 @@ namespace MVVM.View
 
             list.ItemsSource = _userViewModel.pUsers;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            _userViewModel.createUser(InTxFirstName.Text, InTxLastName.Text, InTxEmail.Text);
+        }
     }
 }

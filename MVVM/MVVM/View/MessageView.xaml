@@ -4,19 +4,19 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MVVM.View"
+      xmlns:viewmodel="clr-namespace:MVVM.ViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MessageView">
 
+    
 
     <Grid Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+     
 
         <Label Content="Messagerie" HorizontalAlignment="Left" Margin="28,27,0,0" VerticalAlignment="Top" Height="74" Width="371" FontSize="36" FontFamily="Sylfaen" Background="#00000000" FontWeight="Bold"/>
         <Label Content="Destinataire" HorizontalContentAlignment="Center" Margin="28,86,624,318" FontWeight="Bold" Background="#FFAFB7D4"/>
-        <ComboBox x:Name="cBoxDestinataire" HorizontalAlignment="Left" Margin="28,111,0,0" VerticalAlignment="Top" Width="148" Height="22">
+        <ComboBox ItemsSource="{Binding pUsers}" x:Name="cBoxDestinataire" HorizontalAlignment="Left" Margin="28,111,0,0" VerticalAlignment="Top" Width="148" Height="22">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -26,7 +26,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <Label Content="Expéditeur" HorizontalContentAlignment="Center" Margin="226,86,426,318" FontWeight="Bold" Background="#FFAFB7D4"/>
-        <ComboBox x:Name="cBoxExpediteur" HorizontalAlignment="Left" Margin="226,111,0,0" VerticalAlignment="Top" Width="148" Height="22">
+        <ComboBox ItemsSource="{Binding pUsers}" x:Name="cBoxExpediteur" HorizontalAlignment="Left" Margin="226,111,0,0" VerticalAlignment="Top" Width="148" Height="22">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -36,11 +36,17 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Label Content="Votre message" HorizontalContentAlignment="Center" Margin="28,165,426,239" FontWeight="Bold" Background="#FFAFB7D4"/>
+        <Label Content="{Binding ElementName=cBoxExpediteur, Path=SelectedValue.pFirstName}" ContentStringFormat="Votre message pour {0}" HorizontalContentAlignment="Center" Margin="28,165,426,239" FontWeight="Bold" Background="#FFAFB7D4"/>
         <TextBox x:Name="boxMessage" HorizontalAlignment="Left" Height="160" Margin="28,190,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="346"/>
         <Button Content="Envoyer" HorizontalAlignment="Left" Margin="28,370,0,0" VerticalAlignment="Top" Width="346" Height="38" Background="#FFAFB7D4" FontWeight="Bold" Click="Button_Click"/>
+        <DataGrid IsReadOnly="True" ItemsSource="{Binding pMessages}" x:Name="dgMessage" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="297" Margin="404,111,0,0" VerticalAlignment="Top" Width="370">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Expediteur" Binding="{Binding pDestinataire.pEmail}" />
+                <DataGridTextColumn Header="Destinataire" Binding="{Binding pExpediteur.pEmail}" />
+                <DataGridTextColumn Header="Message" Binding="{Binding pMessage}" />
+            </DataGrid.Columns>
+        </DataGrid>
 
 
-
-    </Grid>
+        </Grid>
 </Page>

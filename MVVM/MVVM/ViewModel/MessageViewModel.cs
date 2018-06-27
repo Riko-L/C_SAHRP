@@ -5,11 +5,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace MVVM.ViewModel
 {
     class MessageViewModel : BaseViewModel
     {
+        
 
         public Message pMessage { get; set; }
 
@@ -26,6 +28,7 @@ namespace MVVM.ViewModel
         }
 
 
+        //Avec ICommand Nomalement
         public void setMessage(User aDestinataire, User aExpediteur, string aMessage)
         {
             if (aDestinataire != null && aExpediteur != null && aMessage != null)
@@ -36,7 +39,7 @@ namespace MVVM.ViewModel
             }
         }
 
-
+   
 
         public void LoadUsers()
         {

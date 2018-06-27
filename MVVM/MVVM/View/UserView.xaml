@@ -9,30 +9,44 @@
       Title="UserView">
 
     <Grid>
-        <StackPanel HorizontalAlignment = "Left">
-
-            <ListView x:Name="list">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="141*"/>
+            <ColumnDefinition Width="259*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="133*"/>
+            <RowDefinition Height="92*"/>
+        </Grid.RowDefinitions>
+        <DockPanel HorizontalAlignment = "Left" Grid.RowSpan="2" Width="800" Grid.ColumnSpan="2">
+            <ListView x:Name="list" Width="800" Background="{x:Null}" Margin="0,0,0,207" Height="192" VerticalAlignment="Bottom">
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation = "Horizontal">
-                            <TextBox Text = "{Binding pFirstName}" 
-                        Width = "100" Margin = "3 5 3 5"/>
-
-                            <TextBox Text = "{Binding pFirstName}" 
-                        Width = "100" Margin = "0 5 3 5"/>
-
-                            <TextBlock Text = "{Binding pFirstName}" 
-                        Margin = "0 5 3 5"/>
-
+                        <StackPanel Orientation = "Horizontal" Background="{x:Null}">
+                            <TextBlock Text = "{Binding pFirstName}" Width = "100" Margin = "3 5 3 5" Background="{x:Null}"/>
+                            <TextBlock Text = "{Binding pLastName}" Width = "100" Margin = "0 5 3 5"/>
+                            <TextBlock Text = "{Binding pEmail}" Margin = "0 5 3 5"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
 
             </ListView>
 
+        </DockPanel>
+        <StackPanel  HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1" Margin="10,26,0,138" Orientation="Horizontal" Height="20" Width="272" >
+            <TextBlock Text="FirstName" Width="96"/>
+            <TextBox x:Name="InTxFirstName" Width="176" />
         </StackPanel>
-        
-        
+        <StackPanel  HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1" Margin="10,60,0,104" Orientation="Horizontal" Height="20" Width="272" >
+            <TextBlock Text="LastName" Width="96"/>
+            <TextBox x:Name="InTxLastName" Width="176" />
+        </StackPanel>
+        <StackPanel  HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1" Margin="10,96,0,68" Orientation="Horizontal" Height="20" Width="272" >
+            <TextBlock Text="Email" Width="96"/>
+            <TextBox x:Name="InTxEmail" Width="176" />
+        </StackPanel>
+        <Button Content="Enregistrer" HorizontalAlignment="Left" Margin="197,154,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" FontWeight="Bold" Click="Button_Click"/>
+
+
     </Grid>
 </Page>

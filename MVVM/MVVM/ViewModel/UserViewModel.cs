@@ -30,6 +30,13 @@ namespace MVVM.ViewModel
 
             pUsers = wUsers;
         }
+        
+
+        public void createUser(string aFirstName, string aLastName, string aEmail)
+        {
+            pUsers.Add(new User(aFirstName, aLastName, aEmail));
+        }
+
 
     }
 }

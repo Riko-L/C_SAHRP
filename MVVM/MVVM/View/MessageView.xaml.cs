@@ -28,10 +28,16 @@ namespace MVVM.View
         {
             InitializeComponent();
 
+
             _messageViewModel = new MessageViewModel();
 
-            cBoxDestinataire.ItemsSource = _messageViewModel.pUsers;
+           this.DataContext = _messageViewModel;
+            //base.DataContext = _messageViewModel;
+
+            /*cBoxDestinataire.ItemsSource = _messageViewModel.pUsers;
             cBoxExpediteur.ItemsSource = _messageViewModel.pUsers;
+
+            dgMessage.ItemsSource = _messageViewModel.pMessages;*/
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
